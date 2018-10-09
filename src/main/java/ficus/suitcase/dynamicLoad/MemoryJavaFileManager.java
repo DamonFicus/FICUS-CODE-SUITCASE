@@ -1,7 +1,5 @@
 package ficus.suitcase.dynamicLoad;
 
-import javax.tools.*;
-import java.io.*;
 import java.net.URI;
 import java.nio.CharBuffer;
 import java.util.HashMap;
@@ -14,7 +12,8 @@ import java.util.Map;
  * 要求源码位于磁盘上，且编译后的字节码也是写在本地磁盘上
  * 而要对于内存中动态生成或者是网络上获取的java文件，运行期动态创建并运行，
  * 就要通过ForwardingJavaFileManager 的API去实现；
- *
+ * @date  20181009
+ * @author DamonFicus
  */
 public final class MemoryJavaFileManager extends ForwardingJavaFileManager {
 

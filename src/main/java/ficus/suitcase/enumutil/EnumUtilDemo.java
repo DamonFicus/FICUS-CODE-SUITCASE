@@ -1,7 +1,7 @@
 package ficus.suitcase.enumutil;
 
 /**
- * Created by 01333346 on 2018/10/9.
+ * Created by DamonFicus on 2018/10/9.
  * @author DamonFicus
  */
 public class EnumUtilDemo {

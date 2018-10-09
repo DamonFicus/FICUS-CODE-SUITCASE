@@ -2,13 +2,12 @@ package ficus.suitcase.fileio;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.*;
 
 /**
- * 类说明：<br>
+ * 类说明：
  * 读写文件工具类,提供统一的字符编码
- * 详细描述：<br>
- * @author
+ * 详细描述：
+ * @author DamonFicus
  */
 public final class ReaderHelper {
 	private static final Logger logger = LoggerFactory.getLogger(ReaderHelper.class);

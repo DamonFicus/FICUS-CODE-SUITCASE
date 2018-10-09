@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * 使用场景：对于服务只通知到某个端口，没有具体回调地址的场景，或者多个服务共用一个端口时(可根据内容区分，发往不同的目的服务器)
  * 用这种监听的方式处理更轻量和灵活；
  * 这种处理回调监听的方式比mina监听端口更合理和灵活；
- * Created by 01333346
+ * Created by DamonFicus on 20181009
  * @author DamonFicus
  */
 public class JettyListenerServer {

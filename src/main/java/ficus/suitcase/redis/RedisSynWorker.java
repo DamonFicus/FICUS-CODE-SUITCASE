@@ -32,6 +32,7 @@ public abstract class RedisSynWorker<T> {
 	}
 
 	public abstract T doTask(String key) throws Throwable;
+	
 	/**
 	 * 获得锁
 	 * @param key
