@@ -1,6 +1,4 @@
-package ficus.suitcase;
-
-import ficus.suitcase.enumutil.CommonEnum;
+package ficus.suitcase.enumutil;
 
 /**
  * Created by 01333346 on 2018/10/9.
