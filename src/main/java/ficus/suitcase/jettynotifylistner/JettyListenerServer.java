@@ -35,7 +35,7 @@ public class JettyListenerServer {
      * @throws Exception
      */
     public void startServer() throws Exception {
-        logger.info("JettyListenerServer 监听服务通知服务启动");
+
         logger.info("JettyListenerServer 服务启动中,监听服务端口{}",ASYN_NOTIFY_PORT);
         server = new Server();
         ServerConnector connector = new ServerConnector(server);
@@ -48,6 +48,7 @@ public class JettyListenerServer {
         handlers.setHandlers(new Handler[] { context, new DefaultHandler()});
         server.setHandler(handlers);
         server.start();
+        logger.info("JettyListenerServer 监听服务通知服务启动成功");
     }
 
     /**
