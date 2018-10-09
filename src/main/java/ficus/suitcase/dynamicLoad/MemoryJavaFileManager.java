@@ -30,10 +30,12 @@ public final class MemoryJavaFileManager extends ForwardingJavaFileManager {
 		return classBytes;
 	}
 
+	@Override
 	public void close() throws IOException {
 		classBytes = new HashMap<String, byte[]>();
 	}
 
+	@Override
 	public void flush() throws IOException {
 	}
 
@@ -48,6 +50,7 @@ public final class MemoryJavaFileManager extends ForwardingJavaFileManager {
 			this.code = code;
 		}
 
+		@Override
 		public CharBuffer getCharContent(boolean ignoreEncodingErrors) {
 			return CharBuffer.wrap(code);
 		}
@@ -69,8 +72,10 @@ public final class MemoryJavaFileManager extends ForwardingJavaFileManager {
 			this.name = name;
 		}
 
+		@Override
 		public OutputStream openOutputStream() {
 			return new FilterOutputStream(new ByteArrayOutputStream()) {
+				@Override
 				public void close() throws IOException {
 					out.close();
 					ByteArrayOutputStream bos = (ByteArrayOutputStream) out;
@@ -80,6 +85,7 @@ public final class MemoryJavaFileManager extends ForwardingJavaFileManager {
 		}
 	}
 
+	@Override
 	public JavaFileObject getJavaFileForOutput(
 			Location location, String className,
 			JavaFileObject.Kind kind, FileObject sibling) throws IOException {
@@ -104,9 +110,10 @@ public final class MemoryJavaFileManager extends ForwardingJavaFileManager {
 				final StringBuilder newUri = new StringBuilder();
 				newUri.append("mfm:///");
 				newUri.append(name.replace('.', '/'));
-				if (name.endsWith(EXT))
+				if (name.endsWith(EXT)) {
 					newUri.replace(newUri.length() - EXT.length(),
 							newUri.length(), EXT);
+				}
 				return URI.create(newUri.toString());
 			} catch (Exception exp) {
 				return URI.create("mfm:///com/sun/script/java/java_source");
