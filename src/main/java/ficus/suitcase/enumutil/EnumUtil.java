@@ -2,6 +2,7 @@ package ficus.suitcase.enumutil;
 
 /**
  * Created by 01333346 on 2018/10/9.
+ * @author DamonFicus
  */
 public class EnumUtil {
 
@@ -12,9 +13,11 @@ public class EnumUtil {
      * @throws
      */
     public static <T extends CommonEnum> T getEnumBycode(Class<T> clazz, int code) {
-        for(T _enum : clazz.getEnumConstants())
-            if(code == _enum.getCode())
-                return _enum;
+        for(T enumOjb : clazz.getEnumConstants()) {
+            if (code == enumOjb.getCode()) {
+                return enumOjb;
+            }
+        }
         return null;
     }
 
@@ -25,10 +28,11 @@ public class EnumUtil {
      * @throws
      */
     public static <T extends CommonEnum> T getEnumByName(Class<T> clazz, String name) {
-        for(T _enum : clazz.getEnumConstants())
-            if(_enum.getName().equals(name)) {
-                return _enum;
+        for(T enumOjb : clazz.getEnumConstants()) {
+            if (enumOjb.getName().equals(name)) {
+                return enumOjb;
             }
+        }
         return null;
     }
 
@@ -39,10 +43,11 @@ public class EnumUtil {
      * @throws
      */
     public static <T extends CommonEnum> T getEnumByDesc(Class<T> clazz, String desc) {
-        for(T _enum : clazz.getEnumConstants())
-            if(_enum.getDesc().equals(desc)) {
-                return _enum;
+        for(T enumOjb : clazz.getEnumConstants()) {
+            if (enumOjb.getDesc().equals(desc)) {
+                return enumOjb;
             }
+        }
         return null;
     }
 
