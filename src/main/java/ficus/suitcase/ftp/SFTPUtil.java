@@ -72,9 +72,10 @@ public class SFTPUtil {
                 logger.debug("Session connected.");
                 logger.debug("Opening Channel.");
             }
-            // 打开SFTP通道
+            //打开SFTP通道
             Channel channel = session.openChannel("sftp");
-            channel.connect(); // 建立SFTP通道的连接
+            //建立SFTP通道的连接
+            channel.connect();
             if (isDebug) {
                 logger.debug("Connected successfully to ftpHost = " + ftpHost + ",as ftpUserName = " + ftpUserName
                         + ", returning: " + channel);
@@ -129,7 +130,6 @@ public class SFTPUtil {
             if (inputStream != null) {
                 inputStream.close();
             }
-
             //关闭sftp
             closeChannel();
         }
@@ -146,7 +146,6 @@ public class SFTPUtil {
         try {
             //连接sftp
             connect();
-
             sftp.cd(directory);
             File file = new File(saveFile);
             outputStream = new FileOutputStream(file);
@@ -176,7 +175,6 @@ public class SFTPUtil {
         try {
             //连接sftp
             connect();
-
             sftp.cd(directory);
             sftp.rm(deleteFile);
         } catch (Exception ex) {
