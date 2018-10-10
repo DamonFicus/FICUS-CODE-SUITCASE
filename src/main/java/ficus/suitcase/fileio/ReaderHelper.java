@@ -3,6 +3,8 @@ package ficus.suitcase.fileio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.*;
+
 /**
  * 类说明：
  * 读写文件工具类,提供统一的字符编码
