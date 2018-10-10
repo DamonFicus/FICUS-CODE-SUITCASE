@@ -143,6 +143,12 @@
       <version>1.7.2</version>
     </dependency>
 
+    <dependency><!-- Ftp -->
+      <groupId>it.sauronsoftware</groupId>
+      <artifactId>ftp4j</artifactId>
+      <version>1.7.2</version>
+    </dependency>
+
   </dependencies>
 
   <build>
