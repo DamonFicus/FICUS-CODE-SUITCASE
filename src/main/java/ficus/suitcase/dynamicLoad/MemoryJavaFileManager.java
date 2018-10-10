@@ -1,5 +1,7 @@
 package ficus.suitcase.dynamicLoad;
 
+import javax.tools.*;
+import java.io.*;
 import java.net.URI;
 import java.nio.CharBuffer;
 import java.util.HashMap;
@@ -45,7 +47,7 @@ public final class MemoryJavaFileManager extends ForwardingJavaFileManager {
 		final String code;
 
 		StringInputBuffer(String name, String code) {
-			super(toURI(name), Kind.SOURCE);
+			super(toURI(name), JavaFileObject.Kind.SOURCE);
 			this.code = code;
 		}
 
@@ -86,8 +88,8 @@ public final class MemoryJavaFileManager extends ForwardingJavaFileManager {
 
 	@Override
 	public JavaFileObject getJavaFileForOutput(
-			Location location, String className,
-			JavaFileObject.Kind kind, FileObject sibling) throws IOException {
+            JavaFileManager.Location location, String className,
+            JavaFileObject.Kind kind, FileObject sibling) throws IOException {
 		if (kind == JavaFileObject.Kind.CLASS) {
 			return new ClassOutputBuffer(className);
 		} else {
