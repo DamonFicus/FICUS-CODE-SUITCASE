@@ -14,7 +14,7 @@ import java.io.*;
 
 
 /**
- * 将html转化为PDF工具类
+ * 将html|text转化为PDF格式工具类
  * 2018/10/12.
  * @author DamonFicus
  * 另外一种方式：wkhtmltopdf 第三方客户端实现
@@ -52,12 +52,12 @@ public class TextToPdf {
      * @throws IOException
      */
     public static void text2Pdf(String text, String pdf) throws DocumentException, IOException {
-
+        logger.info("start createPdf from [] to []",text,pdf);
         Document document = new Document();
         OutputStream os = new FileOutputStream(new File(pdf));
         PdfWriter.getInstance(document, os);
         document.open();
-        //方法一：使用Windows系统字体(TrueType)
+        //方法一：使用Windows系统字体(TrueType)或者将字体文件放到代码的相对路径下
         BaseFont baseFont = BaseFont.createFont(FONT, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
         Font font = new Font(baseFont);
         InputStreamReader isr = new InputStreamReader(new FileInputStream(new File(text)), "GBK");
@@ -72,9 +72,9 @@ public class TextToPdf {
 
     public static void main(String[] args) throws IOException, DocumentException {
         String htmlFilePath = "E:\\draft\\PDF\\index.html";
-        String pdfFilePath = "E:\\draft\\PDF\\html2pdf.pdf";
-        String textFilePath="E:\\draft\\PDF\\document.txt";
-        String pdfFilePath2="E:\\draft\\PDF\\text2pdf.pdf";
+        String pdfFilePath  = "E:\\draft\\PDF\\html2pdf.pdf";
+        String textFilePath = "E:\\draft\\PDF\\document.txt";
+        String pdfFilePath2 = "E:\\draft\\PDF\\text2pdf.pdf";
         TextToPdf.html2Pdf(htmlFilePath,pdfFilePath);
         TextToPdf.text2Pdf(textFilePath,pdfFilePath2);
     }
