@@ -57,7 +57,7 @@ public class TextToPdf {
         OutputStream os = new FileOutputStream(new File(pdf));
         PdfWriter.getInstance(document, os);
         document.open();
-        //方法一：使用Windows系统字体(TrueType)或者将字体文件放到代码的相对路径下
+        //使用Windows系统字体(TrueType)或者将字体文件放到代码的相对路径下
         BaseFont baseFont = BaseFont.createFont(FONT, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
         Font font = new Font(baseFont);
         InputStreamReader isr = new InputStreamReader(new FileInputStream(new File(text)), "GBK");
