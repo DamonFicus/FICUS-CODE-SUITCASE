@@ -17,6 +17,9 @@ import java.io.*;
  * 将html转化为PDF工具类
  * 2018/10/12.
  * @author DamonFicus
+ * 另外一种方式：wkhtmltopdf 第三方客户端实现
+ * http://wkhtmltopdf.org/
+ * https://github.com/wkhtmltopdf/wkhtmltopdf
  */
 public class TextToPdf {
     private static final Logger logger = LoggerFactory.getLogger(TextToPdf.class);
