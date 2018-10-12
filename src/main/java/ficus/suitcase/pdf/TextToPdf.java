@@ -2,24 +2,33 @@ package ficus.suitcase.pdf;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 
 /**
- * Created by 01333346 on 2018/10/12.
+ * 将html转化为PDF工具类
+ * 2018/10/12.
  * @author DamonFicus
  */
 public class TextToPdf {
     private static final Logger logger = LoggerFactory.getLogger(TextToPdf.class);
-
-    public Boolean htmlToPDF(String htmlFilePath,String pdfFilePath) throws IOException, DocumentException {
+    private static final String FONT = "C:\\Windows\\Fonts\\simhei.ttf";
+    /**
+     * 根据HTML页面生成PDF文件
+     * @param htmlFilePath  html全路径(包括文件名)
+     * @param pdfFilePath   pdf 保存全路径(包括文件名)
+     * @throws IOException
+     * @throws DocumentException
+     */
+    public static void html2Pdf(String htmlFilePath,String pdfFilePath) throws IOException, DocumentException {
         logger.info("start createPdf from [] to []",htmlFilePath,pdfFilePath);
         Boolean createStatus=false;
         Document document = new Document();
@@ -29,15 +38,42 @@ public class TextToPdf {
         XMLWorkerHelper.getInstance().parseXHtml(writer, document,new FileInputStream(htmlFilePath));
         document.close();
         logger.info("create pdf success");
-        return createStatus;
+    }
+
+
+    /**
+     * 根据文本生成PDF文件
+     * @param text  路径加文件名全称
+     * @param pdf   路径加文件名全称
+     * @throws DocumentException
+     * @throws IOException
+     */
+    public static void text2Pdf(String text, String pdf) throws DocumentException, IOException {
+
+        Document document = new Document();
+        OutputStream os = new FileOutputStream(new File(pdf));
+        PdfWriter.getInstance(document, os);
+        document.open();
+        //方法一：使用Windows系统字体(TrueType)
+        BaseFont baseFont = BaseFont.createFont(FONT, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+        Font font = new Font(baseFont);
+        InputStreamReader isr = new InputStreamReader(new FileInputStream(new File(text)), "GBK");
+        BufferedReader bufferedReader = new BufferedReader(isr);
+        String str = "";
+        while ((str = bufferedReader.readLine()) != null) {
+            document.add(new Paragraph(str, font));
+        }
+        document.close();
     }
 
 
     public static void main(String[] args) throws IOException, DocumentException {
         String htmlFilePath = "E:\\draft\\PDF\\index.html";
-        String pdfFilePath = "E:\\draft\\PDF\\htmlToPDF.pdf";
-        TextToPdf textToPdf = new TextToPdf();
-        textToPdf.htmlToPDF(htmlFilePath,pdfFilePath);
+        String pdfFilePath = "E:\\draft\\PDF\\html2pdf.pdf";
+        String textFilePath="E:\\draft\\PDF\\document.txt";
+        String pdfFilePath2="E:\\draft\\PDF\\text2pdf.pdf";
+        TextToPdf.html2Pdf(htmlFilePath,pdfFilePath);
+        TextToPdf.text2Pdf(textFilePath,pdfFilePath2);
     }
 
 }
