@@ -81,7 +81,7 @@ public class RemoveDuplicates {
 
         System.out.println("=========Bymanul=========");
 
-//        int[] disorderNums={0,4,1,3,2,2,1,3,0,4};
+//      int[] disorderNums={0,4,1,3,2,2,1,3,0,4};
         int[] disorderNums={1,1,2};
         int returnLength2=removeDuplicates.removeDuplicates2(disorderNums);
         System.out.println("returnLength2:"+returnLength2);
