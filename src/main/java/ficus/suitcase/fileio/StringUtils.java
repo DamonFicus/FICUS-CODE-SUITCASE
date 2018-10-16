@@ -93,5 +93,20 @@ public class StringUtils {
     }
 
 
+    /**
+     * 常用工具扩展：
+     * 对于将数组中元素以符号或其他字符串的形式进行间隔处理，可以
+     * 使用commons.lang3.StringUtils 工具中的join方法：
+     * StringUtils.join(Object array[],String separator)
+     * 或者
+     * StringUtils.join(T... elements) 自行进行组装
+     * 可用于自定义规则序列的生成；
+     */
+
+    public static void main(String[] args) {
+
+        System.out.println(org.apache.commons.lang3.StringUtils.join(new String[]{"a","b","c"},"&"));
+        System.out.println(org.apache.commons.lang3.StringUtils.join("t",3,"st",0.1,"ele"));
+    }
 
 }
