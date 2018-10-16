@@ -35,6 +35,7 @@ public class Plindrome {
     public static void main(String[] args) {
         Plindrome plindrome = new Plindrome();
         System.out.println(plindrome.isPalindrome(121));
+        System.out.println(plindrome.isPalindrome(-121));
     }
 
 }
