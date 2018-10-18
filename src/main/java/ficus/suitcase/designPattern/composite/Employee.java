@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 01333346 on 2018/10/18.
+ * Created by DamonFicus on 2018/10/18.
  * 以员工及下属的树形关系来描述组合模式
  */
 public class Employee {
@@ -24,12 +24,15 @@ public class Employee {
     public void add(Employee employee){
         subordinates.add(employee);
     }
+
     public void remove(Employee employee){
         subordinates.remove(employee);
     }
+
     public List<Employee> getSubordinates(){
         return subordinates;
     }
+
     @Override
     public String toString(){
         return ("Employee :[ Name : "+ name
