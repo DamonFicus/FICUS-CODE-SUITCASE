@@ -59,7 +59,7 @@ public class ThreeSumTuple {
 
     public static void main(String[] args) {
         ThreeSumTuple  threeSumTuple = new ThreeSumTuple();
-        System.out.println(threeSumTuple.threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
+        System.out.println(threeSumTuple.threeSum(new int[]{-1, 0, 1, 2, -1, -4,2}));
     }
 
 }
