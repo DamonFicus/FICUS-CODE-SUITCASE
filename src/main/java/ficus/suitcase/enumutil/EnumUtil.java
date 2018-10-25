@@ -3,6 +3,8 @@ package ficus.suitcase.enumutil;
 /**
  * Created by DamonFicus on 2018/10/9.
  * @author DamonFicus
+ * 1.思路一是通过反射获取到对应的枚举对象
+ * 2.思路二是通过自带的values方法遍历，根据name来匹配，如 A(Y,'DESC') 即根据Y来找到对应的A，然后getName拿到其描述DESC
  */
 public class EnumUtil {
 
