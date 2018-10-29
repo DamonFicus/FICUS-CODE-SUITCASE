@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by 01333346 on 2018/10/29.
  * @author DamonFicus
+ * 2018/10/29.
  * 文件读写时候，对于大文件的处理
  * 使用org.apache.commons.io 包的 FileUtils
  * 对文件按行处理，避免常规的将文件一次性读取到
@@ -21,7 +21,6 @@ import java.util.List;
 public class FileIoUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileIoUtils.class);
-    public static final int FILE_NUMBER_PER_WRITE = 100;
     public static final String CHANNEL_CODE = "";
     public static final String FILE_IS_EMPTY = "fileIsEmpty";
 
@@ -104,7 +103,6 @@ public class FileIoUtils {
 
     /**
      * 方法说明：<br>
-     *
      * @param remoteLine
      * @param corpNo
      * @return String
