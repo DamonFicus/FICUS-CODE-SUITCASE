@@ -4,10 +4,7 @@ package ficus.suitcase.localcache;
 import java.util.Date;
 
 /**
- * 类说明：<br>
-   卡BIN信息实体
- * 详细描述：<br>
- *
+ * 卡BIN信息实体
  * @author DamonFicus
  */
 public class DebitCardBinInfo extends BaseEntity {
