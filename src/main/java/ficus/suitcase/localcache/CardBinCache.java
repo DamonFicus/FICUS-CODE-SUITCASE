@@ -16,7 +16,7 @@ import java.util.Map;
  * 卡bin信息的本地缓存
  * 1.用两个容器进行主从存装
  * 2.调度更新缓存,标识区分当前正提供服务的缓存，
- * 更新完备用缓存后,使用备用缓存提供服务
+ *   更新完备用缓存后,使用备用缓存提供服务
  */
 @Component
 public class CardBinCache {

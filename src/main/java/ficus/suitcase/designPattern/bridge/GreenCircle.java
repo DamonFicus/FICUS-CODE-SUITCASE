@@ -1,7 +1,7 @@
 package ficus.suitcase.designPattern.bridge;
 
 /**
- * Created by 01333346 on 2018/11/2.
+ * Created by DamonFicus on 2018/11/2.
  */
 public class GreenCircle implements DrawAPI {
     @Override
