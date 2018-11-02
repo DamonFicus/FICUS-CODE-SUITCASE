@@ -1,7 +1,5 @@
 package leetcode;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * Created by DamonFicus on 2018/10/15.
  * 判断回文数

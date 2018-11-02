@@ -1,7 +1,7 @@
 package ficus.suitcase.fileio;
 
 /**
- * Created by 01333346 on 2018/10/29.
+ * Created by DamonFicus on 2018/10/29.
  * 分隔符常量
  */
 public final class SplitCnst {

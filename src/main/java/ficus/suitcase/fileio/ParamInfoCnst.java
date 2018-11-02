@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by 01333346 on 2018/10/29.
+ * Created by DamonFicus on 2018/10/29.
  */
 public final class ParamInfoCnst {
     public static final String PAYOUT_WAY_MANUAL = "HAND";
