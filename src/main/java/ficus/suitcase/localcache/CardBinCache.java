@@ -35,29 +35,18 @@ public class CardBinCache {
 
     private Map<String, List<DebitCardBinInfo>> cardBinMapSlave = new HashMap<String, List<DebitCardBinInfo>>();
 
-    private String CURRENT_RESOURCE = MASTER;
+    private String currentResource = MASTER;
 
-/*  @Resource
-    private IDebitCardBinInfoDao debitCardBinInfoDao;*/
-
-
-    public String getCURRENT_RESOURCE() {
-        return CURRENT_RESOURCE;
+    public String getCurrentResource() {
+        return currentResource;
     }
 
-    public void setCURRENT_RESOURCE(String CURRENT_RESOURCE) {
-        this.CURRENT_RESOURCE = CURRENT_RESOURCE;
+    public void setCurrentResource(String currentResource) {
+        this.currentResource = currentResource;
     }
 
 
     private CardBinCache(){
-        //初始未指定缓存主从时，主从缓存全部加载
-        try {
-//            refreshCardBinMap(null,ALL);
-        } catch (Exception e) {
-           logger.error("初始加载主从缓存时异常",e);
-        }
-
     }
 
 
@@ -78,23 +67,23 @@ public class CardBinCache {
         Map<String, List<DebitCardBinInfo>> cardBinMapSource=null;
         //如果是强制刷新则清空缓存对象,再去装载数据：
         if(isforceFresh){
-            if(MASTER.equals(CURRENT_RESOURCE)){;
+            if(MASTER.equals(currentResource)){;
                 cardBinMapMaster.clear();
-            }else if(SLAVE.equals(CURRENT_RESOURCE)){
+            }else if(SLAVE.equals(currentResource)){
                 cardBinMapSlave.clear();
             }
         }
 
-        if(MASTER.equals(CURRENT_RESOURCE)){;
+        if(MASTER.equals(currentResource)){;
             cardBinMapSource=cardBinMapMaster;
-        }else if(SLAVE.equals(CURRENT_RESOURCE)){
+        }else if(SLAVE.equals(currentResource)){
             cardBinMapSource=cardBinMapSlave;
         }
 
         if(cardBinMapSource.isEmpty()||isforceFresh){
             synchronized (cardBinMapSource) {
                 if(cardBinMapSource.isEmpty()||isforceFresh){
-                    refreshCardBinMap(CURRENT_RESOURCE,null);
+                    refreshCardBinMap(currentResource,null);
                 }
             }
         }
@@ -140,17 +129,17 @@ public class CardBinCache {
     public Map<String, List<DebitCardBinInfo>> assembleCarbinInfo() throws Exception {
         logger.info("CardBinCache.refreshCardBinMap从数据库中获取卡bin数据信息 start....");
         try {
-//            IDebitCardBinInfoDao debitCardBinInfoDao=(IDebitCardBinInfoDao) SpringContextHolder.getBean(IDebitCardBinInfoDao.class);
-//            List<DebitCardBinInfo> cardBinInfos = debitCardBinInfoDao.queryDebitCardBinDetail();
-            List<DebitCardBinInfo> cardBinInfos=null;//数据获取根据实际库表来；
+            //1.数据来源做获取：DAO查询或数据获取接口调用
+            //数据获取根据实际库表来；
+            List<DebitCardBinInfo> cardBinInfos=null;
             List<DebitCardBinInfo> infos = null;
-            Map<String, List<DebitCardBinInfo>> extraCardBinMap = new HashMap<String, List<DebitCardBinInfo>>();
+            Map<String, List<DebitCardBinInfo>> extraCardBinMap = new HashMap<>(16);
             if (CollectionUtils.isNotEmpty(cardBinInfos)) {
                 for (DebitCardBinInfo cardBin : cardBinInfos) {
                     if (extraCardBinMap.containsKey(cardBin.getCardFlag())) {
                         extraCardBinMap.get(cardBin.getCardFlag()).add(cardBin);
                     } else {
-                        infos = new ArrayList<DebitCardBinInfo>();
+                        infos = new ArrayList<>();
                         infos.add(cardBin);
                         extraCardBinMap.put(cardBin.getCardFlag(), infos);
                     }

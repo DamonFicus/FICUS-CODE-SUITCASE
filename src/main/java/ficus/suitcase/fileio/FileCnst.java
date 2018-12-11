@@ -2,6 +2,7 @@ package ficus.suitcase.fileio;
 
 /**
  * Created by DanmonFicus on 2018/10/29.
+ * @author DamonFicus
  */
 public class FileCnst {
     public static final String SYSTEM_LINE = System.getProperty("line.separator");

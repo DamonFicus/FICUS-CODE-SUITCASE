@@ -18,7 +18,9 @@ import java.util.Properties;
  * @author DamonFicus
  */
 public class Ftp4jUtil {
+
 	private final Logger logger = LoggerFactory.getLogger(Ftp4jUtil.class);
+
 	private final boolean isDebug = logger.isDebugEnabled();
 	/**
 	 * FTP服务地址
@@ -38,6 +40,8 @@ public class Ftp4jUtil {
 	private int port = 21;
 	
 	private static final int FTP_READ_TIME_OUT = 60;
+
+	private static final String SLASH="/";
 
 	public Ftp4jUtil(String serverIp, String userName, String password) {
 		this.address = serverIp;
@@ -88,8 +92,7 @@ public class Ftp4jUtil {
 			return;
 		}
 		try {
-			//有些FTP服务器未实现此功能，若未实现则会出错
-			//退出登录
+			//退出登录(有些FTP服务器未实现此功能，若未实现则会出错)
 			client.logout();
 		} catch (FTPException fe) {
 		} finally {
@@ -230,7 +233,7 @@ public class Ftp4jUtil {
             return;
         }  
         dir = formatPath4FTP(dir);
-        String[] dirs = dir.split("/");
+        String[] dirs = dir.split(SLASH);
         for (int i = 0; i < dirs.length; i++) {  
             dir = dirs[i];  
             if (!StringUtils.isEmpty(dir)) {
@@ -251,9 +254,9 @@ public class Ftp4jUtil {
     private String formatPath4FTP(String path) {
             String reg0 = "\\\\+";
             String reg = "\\\\+|/+";
-            String temp = path.trim().replaceAll(reg0, "/");
-            temp = temp.replaceAll(reg, "/");
-            if (temp.length() > 1 && temp.endsWith("/")) {
+            String temp = path.trim().replaceAll(reg0, SLASH);
+            temp = temp.replaceAll(reg, SLASH);
+            if (temp.length() > 1 && temp.endsWith(SLASH)) {
                     temp = temp.substring(0, temp.length() - 1);
             }
             return temp;
@@ -289,7 +292,7 @@ public class Ftp4jUtil {
             if (f.getType() == FTPFile.TYPE_DIRECTORY) {  
                 return FTPFile.TYPE_DIRECTORY;  
             }  
-            String path = dir + "/" + f.getName();
+            String path = dir + SLASH + f.getName();
             try {  
                 int len = ftpClient.list(path).length;  
                 if (len == 1) {  

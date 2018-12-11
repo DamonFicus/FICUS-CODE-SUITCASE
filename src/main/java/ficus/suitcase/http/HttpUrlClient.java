@@ -13,7 +13,14 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Map;
 
-public class HttpURLClient {
+/**
+ * @author DamonFicus
+ */
+public class HttpUrlClient {
+
+	private static final String HTTPS_PREFIX="https";
+
+
 	private static HttpURLConnection getConnection(String submitUrl, String charset, String method, int connectTimeout,
                                                    int readTimeout) throws Exception {
 		if (StringUtils.isBlank(charset)) {
@@ -35,7 +42,7 @@ public class HttpURLClient {
 		httpURLConnection.setRequestMethod(method);
 		httpURLConnection.setRequestProperty("Content-type", "text/xml;charset=" + charset);
 		httpURLConnection.setUseCaches(false);
-		if (StringUtils.equalsIgnoreCase("https", url.getProtocol())) {
+		if (StringUtils.equalsIgnoreCase(HTTPS_PREFIX, url.getProtocol())) {
 			SSLContext sc = SSLContext.getInstance("SSL");
 			sc.init(null, new TrustManager[] { new TrustAnyTrustManager() }, new java.security.SecureRandom());
 			if (httpURLConnection instanceof HttpsURLConnection) {
@@ -48,7 +55,6 @@ public class HttpURLClient {
 	}
 
 	private static String getResult(HttpURLConnection httpURLConnection, String resCharset) throws Exception {
-		// httpURLConnection.connect();
 		int responseCode = httpURLConnection.getResponseCode();
 		if (responseCode == HttpURLConnection.HTTP_OK) {
 			InputStream inputStream = httpURLConnection.getInputStream();
@@ -66,7 +72,6 @@ public class HttpURLClient {
 			sb.append(str);
 		}
 		String paramStr = StringUtils.substringBeforeLast(sb.toString(), "&");
-		// SysLogUtils.debug("参数拼接:", requestParam);
 		return paramStr;
 	}
 

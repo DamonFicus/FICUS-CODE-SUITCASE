@@ -1,4 +1,4 @@
-package ficus.suitcase.dynamicLoad;
+package ficus.suitcase.dynamicload;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,9 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+/**
+ * @author DamonFicus
+ */
 public class SpringContextHolder implements ApplicationContextAware, DisposableBean {
     private static ApplicationContext applicationContext = null;
     private static Logger logger = LoggerFactory.getLogger(SpringContextHolder.class);

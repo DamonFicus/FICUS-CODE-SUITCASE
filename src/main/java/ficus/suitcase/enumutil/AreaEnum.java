@@ -6,7 +6,18 @@ package ficus.suitcase.enumutil;
  * @author DamonFicus 20181025
  */
 public enum AreaEnum {
-	AREA_IN_CITY("Y","同城"),AREA_OUT_CITY("N","异地"),AREA_ALL("A","同城和异地");
+	/**
+	 * 同城
+	 */
+	AREA_IN_CITY("Y","同城"),
+	/**
+	 * 异地
+	 */
+	AREA_OUT_CITY("N","异地"),
+	/**
+	 * 同城和异地
+	 */
+	AREA_ALL("A","同城和异地");
 
 	private String value;
 	private String name;

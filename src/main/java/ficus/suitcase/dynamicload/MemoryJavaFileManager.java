@@ -1,4 +1,4 @@
-package ficus.suitcase.dynamicLoad;
+package ficus.suitcase.dynamicload;
 
 import javax.tools.*;
 import java.io.*;
@@ -33,7 +33,7 @@ public final class MemoryJavaFileManager extends ForwardingJavaFileManager {
 
 	@Override
 	public void close() throws IOException {
-		classBytes = new HashMap<String, byte[]>();
+		classBytes = new HashMap<String, byte[]>(16);
 	}
 
 	@Override

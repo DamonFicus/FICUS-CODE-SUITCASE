@@ -26,10 +26,6 @@ public class CardBinCacheRefreshTask {
     @Resource
     private CardBinCache cardBinCache;
 
-
-//    @Autowired
-//    private IDebitCardBinInfoDao debitCardBinInfoDao;
-
     public void run(){
         logger.info("卡bin调度触发,时间 "+new Date());
         cardBinCacheRefresh();
@@ -41,13 +37,13 @@ public class CardBinCacheRefreshTask {
 
         logger.info("CardBinCacheRefreshTask-通用查询模块：cardbin信息刷新调度开始执行.....");
 
-        String resourceName = cardBinCache.getCURRENT_RESOURCE();
+        String resourceName = cardBinCache.getCurrentResource();
         String newResourceName="";
         if (MASTER.equals(resourceName)) {
-            cardBinCache.setCURRENT_RESOURCE(SLAVE);
+            cardBinCache.setCurrentResource(SLAVE);
             newResourceName=SLAVE;
         } else {
-            cardBinCache.setCURRENT_RESOURCE(MASTER);
+            cardBinCache.setCurrentResource(MASTER);
             newResourceName=MASTER;
         }
         try {

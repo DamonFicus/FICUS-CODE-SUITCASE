@@ -12,13 +12,13 @@ import java.util.concurrent.TimeUnit;
  * 详细描述：redis写时加锁处理类<br>
  * @author DamonFicus
  */
-public abstract class RedisSynWorker<T> {
+public abstract class AbstractRedisSynWorker<T> {
 	private static final long SLEEP_TIME = 500L;
 	private static final int LOCK_TIMES = 20;
 	private static final long KEY_EXPIRETIME = 600L;
 	private RedisTemplate<String, Object> redisTemplate;
 	
-	public RedisSynWorker(RedisTemplate<String, Object> redisTemplate) {
+	public AbstractRedisSynWorker(RedisTemplate<String, Object> redisTemplate) {
 		this.redisTemplate = redisTemplate;
 	}
 	
@@ -31,6 +31,12 @@ public abstract class RedisSynWorker<T> {
 		}
 	}
 
+	/**
+	 * doTask
+	 * @param key
+	 * @return
+	 * @throws Throwable
+	 */
 	public abstract T doTask(String key) throws Throwable;
 	
 	/**
@@ -69,7 +75,9 @@ public abstract class RedisSynWorker<T> {
 					return true;
 				}				
 				try {
-					if (pollTimes >= LOCK_TIMES) break;
+					if (pollTimes >= LOCK_TIMES) {
+						break;
+					}
 					pollTimes++;
 					Thread.sleep(SLEEP_TIME);
 				} catch (Exception e) {

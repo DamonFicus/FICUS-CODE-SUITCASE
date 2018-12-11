@@ -34,7 +34,7 @@ public class StringUtils {
      */
     public static String getFtpFileName(String path) {
         /**split里面必须是正则表达式，"\\"的作用是对字符串转义*/
-        String temp[] = path.split("/");
+        String [] temp = path.split("/");
         return temp[temp.length - 1];
     }
 

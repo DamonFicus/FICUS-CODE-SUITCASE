@@ -20,7 +20,10 @@ public class GetFileByShell {
      * tarConfigMap,serverConfigMap 这种参数获取可以自己根据实际情况通过数据库或配置中心，亦或是配置文件中去获取参数
      */
     Map<String, String> tarConfigMap = new HashMap<String, String>();
+
     Map<String, String> serverConfigMap = new HashMap<String, String>();
+
+    private static final String Y="Y";
 
     private static final Logger logger = LoggerFactory.getLogger(GetFileByShell.class);
     private static final String ENCODING="UTF-8";
@@ -40,14 +43,16 @@ public class GetFileByShell {
             //建行的对账文件通过getfile客户端获取，组装并通过shell脚本的方式去执行文件下载
             boolean isFileDown = true;
             //默认为true.sh运行标识为N时应通过linux调度方式运行shell脚本获取对账文件
-            String shRunFlag = tarConfigMap.get("SH_RUN_FLAG"); //sh运行标识(Y:运行;N:不运行)
-            String rootPath = tarConfigMap.get("TAR_SAVE_PATH");//获取对账文件放置路径
+            //sh运行标识(Y:运行;N:不运行)
+            String shRunFlag = tarConfigMap.get("SH_RUN_FLAG");
+            //获取对账文件放置路径
+            String rootPath = tarConfigMap.get("TAR_SAVE_PATH");
             //trsHomeKey,trsHomeVal的获取;
-            Map<String, String> propertyMap = new HashMap<String, String>();
+            Map<String, String> propertyMap = new HashMap<>(16);
             propertyMap.put("trsHomeKey", tarConfigMap.get("trsHomeKey"));
             propertyMap.put("trsHomeVal", tarConfigMap.get("trsHomeVal"));
             // 执行shell命令获取文件
-            if ("Y".equals(shRunFlag)) {
+            if (Y.equals(shRunFlag)) {
                 try {
                     isFileDown = getFileByShell(rootPath, sftpFileName, propertyMap, ymdStr);
                 } catch (Exception e) {
@@ -89,11 +94,12 @@ public class GetFileByShell {
             pb.directory(new File(rootPath));
             Map<String, String> env = pb.environment();
             // 分析'transfile/etc/trsenv.sh'获得的值:
-            String trsHomeKey = propertymap.get("trsHomeKey");// TRSHOME
+            String trsHomeKey = propertymap.get("trsHomeKey");
             // 设置环境变量
             if (StringUtils.isNotEmpty(env.get(trsHomeKey))) {
                 // 分析'transfile/etc/trsenv.sh'获得的值:
-                String trsHomeVal = propertymap.get("trsHomeVal");// $HOME/transfile
+                // $HOME/transfile
+                String trsHomeVal = propertymap.get("trsHomeVal");
                 env.put(trsHomeKey, trsHomeVal);
                 env.put("PATH", trsHomeVal + "/bin:" + env.get("PATH"));
             }
@@ -134,7 +140,14 @@ public class GetFileByShell {
         private String fileName;
 
         private static enum Type {
-            ERROR, INPUT
+            /**
+             * 文件类型 ERROR
+             */
+            ERROR,
+            /**
+             * 文件类型 INPUT
+             */
+            INPUT
         }
 
         public StreamHandler(InputStream is, String rootPath, Type type) {

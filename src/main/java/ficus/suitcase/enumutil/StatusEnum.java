@@ -5,8 +5,12 @@ package ficus.suitcase.enumutil;
  * @author DamonFicus
  */
 public enum StatusEnum implements CommonEnum {
-
-    WAITTING(0,"WAITTING","等待"), STARTED(1,"STARTED","开始"),END(2,"END","结束");
+    /**等待*/
+    WAITTING(0,"WAITTING","等待"),
+    /**开始*/
+    STARTED(1,"STARTED","开始"),
+    /**结束*/
+    END(2,"END","结束");
 
     private int code;
     private String name;

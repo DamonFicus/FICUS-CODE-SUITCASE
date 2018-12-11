@@ -1,4 +1,4 @@
-package ficus.suitcase.designPattern.composite;
+package ficus.suitcase.designpattern.composite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * Created by DamonFicus on 2018/10/18.
  * 以员工及下属的树形关系来描述组合模式
+ * @author DamonFicus
  */
 public class Employee {
 

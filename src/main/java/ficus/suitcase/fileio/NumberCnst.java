@@ -2,6 +2,7 @@ package ficus.suitcase.fileio;
 
 /**
  * Created by DamonFicus on 2018/10/29.
+ * @author DamonFicus
  */
 public final class NumberCnst {
     public static final int NUMBER_ZERO = 0;

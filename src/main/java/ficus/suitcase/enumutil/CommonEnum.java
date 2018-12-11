@@ -7,17 +7,20 @@ package ficus.suitcase.enumutil;
 public interface CommonEnum {
 
     /**
-     * @return code
+     * getCode
+     * @return
      */
     int getCode();
 
     /**
-     * @return name
+     * getName
+     * @return
      */
     String getName();
 
     /**
-     * @return desc
+     * getDesc
+     * @return
      */
     String getDesc();
 }

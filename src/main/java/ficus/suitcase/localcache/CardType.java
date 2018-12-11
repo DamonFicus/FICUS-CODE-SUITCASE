@@ -4,6 +4,7 @@ package ficus.suitcase.localcache;
 /**
  * 类说明：<br>
  * 卡种类型
+ * @author DamonFicus
  */
 public enum CardType {
 	/**

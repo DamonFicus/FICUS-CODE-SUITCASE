@@ -3,6 +3,7 @@ package ficus.suitcase.fileio;
 /**
  * Created by DamonFicus on 2018/10/29.
  * 分隔符常量
+ * @author DamonFicus
  */
 public final class SplitCnst {
     public static final String SPLIT_VERTICAL_SEPARATOR = "\\|";

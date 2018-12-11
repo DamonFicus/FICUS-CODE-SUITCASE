@@ -13,6 +13,7 @@ import java.util.Date;
  * 时间工具;
  * 如果org.apache.commons.lang3.time.DateUtils;包中能够满足的
  * 尽量使用lang3包的工具控件；
+ * @author DamonFicus
  */
 public class DateUtil {
 

@@ -1,4 +1,4 @@
-package ficus.suitcase.dynamicLoad;
+package ficus.suitcase.dynamicload;
 
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
@@ -12,21 +12,29 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author DamonFicus
+ */
 public class DynamicLoader {
 
+	private static final Pattern  INTERFACE_PATTERN=Pattern.compile("public\\s+interface\\s+(\\w+)");
+
+	private static final Pattern  CLASS_PATTERN=Pattern.compile("public\\s+class\\s+(\\w+)");
+
+
 	public static Map<String, byte[]> compileInterface(String javaSrc) {
-		Pattern pattern = Pattern.compile("public\\s+interface\\s+(\\w+)");
-		Matcher matcher = pattern.matcher(javaSrc);
-		if (matcher.find())
+		Matcher matcher = INTERFACE_PATTERN.matcher(javaSrc);
+		if (matcher.find()) {
 			return compile(matcher.group(1) + ".java", javaSrc);
+		}
 		return null;
 	}
 	
 	public static Map<String, byte[]> compileClass(String javaSrc) {
-		Pattern pattern = Pattern.compile("public\\s+class\\s+(\\w+)");
-		Matcher matcher = pattern.matcher(javaSrc);
-		if (matcher.find())
+		Matcher matcher = CLASS_PATTERN.matcher(javaSrc);
+		if (matcher.find()) {
 			return compile(matcher.group(1) + ".java", javaSrc);
+		}
 		return null;
 	}
 
@@ -36,7 +44,7 @@ public class DynamicLoader {
 		StandardJavaFileManager stdManager = compiler.getStandardFileManager(null, null, null);
 		try {
 			MemoryJavaFileManager manager = new MemoryJavaFileManager(stdManager);
-			JavaFileObject javaFileObject = manager.makeStringSource(javaName, javaSrc);
+			JavaFileObject javaFileObject = MemoryJavaFileManager.makeStringSource(javaName, javaSrc);
 			JavaCompiler.CompilationTask task = compiler.getTask(null, manager, null, null, null, Arrays.asList(javaFileObject));
 			if (task.call()) {
 				return manager.getClassBytes();

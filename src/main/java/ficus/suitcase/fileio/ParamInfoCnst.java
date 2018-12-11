@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by DamonFicus on 2018/10/29.
+ * @author DamonFicus
  */
 public final class ParamInfoCnst {
     public static final String PAYOUT_WAY_MANUAL = "HAND";

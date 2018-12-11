@@ -10,10 +10,10 @@ public class ServiceException extends RuntimeException {
 
 	private static final long serialVersionUID = 6668243232129476823L;
 
-	//异常错误码
+	/**异常错误码*/
 	private String code;
 
-	//异常描述
+	/**异常描述*/
 	private String msg;
 
 

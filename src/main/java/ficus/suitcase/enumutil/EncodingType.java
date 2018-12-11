@@ -2,6 +2,7 @@ package ficus.suitcase.enumutil;
 
 /**
  * 类说明：编码枚举类
+ * @author DamonFicus
  */
 public enum EncodingType {
 	

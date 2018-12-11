@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 /**
  * Created by DamonFicus on 2018/10/31.
+ * @author DamonFicus
  */
 public abstract class BaseEntity implements IEntity {
     private static final long serialVersionUID = 1L;
@@ -12,6 +13,7 @@ public abstract class BaseEntity implements IEntity {
     public BaseEntity() {
     }
 
+    @Override
     public long getId() {
         return this.id;
     }
@@ -20,6 +22,7 @@ public abstract class BaseEntity implements IEntity {
         this.id = id;
     }
 
+    @Override
     public String toString() {
         StringBuilder buf = new StringBuilder();
         Method[] methods = this.getClass().getMethods();
@@ -29,7 +32,8 @@ public abstract class BaseEntity implements IEntity {
         for(int n = methods.length; i < n; ++i) {
             try {
                 Method method = methods[i];
-                if((method.getModifiers() & 1) == 1 && method.getDeclaringClass() != Object.class && (method.getParameterTypes() == null || method.getParameterTypes().length == 0)) {
+                Boolean flag=(method.getModifiers() & 1) == 1 && method.getDeclaringClass() != Object.class && (method.getParameterTypes() == null || method.getParameterTypes().length == 0);
+                if(flag) {
                     String methodName = method.getName();
                     String property = null;
                     if(methodName.startsWith("get")) {

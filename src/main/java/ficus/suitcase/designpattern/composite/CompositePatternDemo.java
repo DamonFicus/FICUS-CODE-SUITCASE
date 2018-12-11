@@ -1,4 +1,4 @@
-package ficus.suitcase.designPattern.composite;
+package ficus.suitcase.designpattern.composite;
 
 /**
  * @author DamonFicus
@@ -21,7 +21,7 @@ package ficus.suitcase.designPattern.composite;
 public class CompositePatternDemo {
 
     public static void main(String[] args) {
-        Employee CEO = new Employee("John","CEO", 30000);
+        Employee ceo = new Employee("John","ceo", 30000);
 
         Employee headSales = new Employee("Robert","Head Sales", 20000);
 
@@ -33,8 +33,8 @@ public class CompositePatternDemo {
         Employee salesExecutive1 = new Employee("Richard","Sales", 10000);
         Employee salesExecutive2 = new Employee("Rob","Sales", 10000);
 
-        CEO.add(headSales);
-        CEO.add(headMarketing);
+        ceo.add(headSales);
+        ceo.add(headMarketing);
 
         headSales.add(salesExecutive1);
         headSales.add(salesExecutive2);
@@ -43,8 +43,8 @@ public class CompositePatternDemo {
         headMarketing.add(clerk2);
 
         //打印该组织的所有员工
-        System.out.println(CEO);
-        for (Employee headEmployee : CEO.getSubordinates()) {
+        System.out.println(ceo);
+        for (Employee headEmployee : ceo.getSubordinates()) {
             System.out.println(headEmployee);
             for (Employee employee : headEmployee.getSubordinates()) {
                 System.out.println(employee);

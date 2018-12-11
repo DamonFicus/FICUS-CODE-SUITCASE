@@ -15,8 +15,8 @@ import java.util.Properties;
  * CreateDate: 20181009
  * @author DamonFicus
  */
-public class SFTPUtil {
-    private final Logger logger = LoggerFactory.getLogger(SFTPUtil.class);
+public class SftpUtil {
+    private final Logger logger = LoggerFactory.getLogger(SftpUtil.class);
     private final boolean isDebug = logger.isDebugEnabled();
 
     private String ftpHost;
@@ -28,7 +28,7 @@ public class SFTPUtil {
     private ChannelSftp sftp = null;
     private Session session = null;
 
-    public SFTPUtil(String ftpHost, int ftpPort, String ftpUserName, String ftpPassword, int timeout) {
+    public SftpUtil(String ftpHost, int ftpPort, String ftpUserName, String ftpPassword, int timeout) {
         this.ftpHost = ftpHost;
         this.ftpPassword = ftpPassword;
         this.ftpPort = ftpPort;

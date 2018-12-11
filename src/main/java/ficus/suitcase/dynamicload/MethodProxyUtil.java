@@ -1,4 +1,4 @@
-package ficus.suitcase.dynamicLoad;
+package ficus.suitcase.dynamicload;
 
 
 import com.caucho.hessian.client.HessianProxyFactory;
@@ -30,9 +30,9 @@ public final class MethodProxyUtil {
 	
 	private static final int READ_TIMEOUT = 180000;
 
-	private static final String regex = "[\\w.]+:[\\w.]+";
+	private static final String REGEX = "[\\w.]+:[\\w.]+";
 	
-	private static final Map<String, Map<String, Object>> serviceInfoMap = new HashMap<String, Map<String,Object>>();
+	private static final Map<String, Map<String, Object>> SERVICE_INFO_MAP = new HashMap<String, Map<String,Object>>();
 	
 	/**
 	 * 调用远端Hessian服务方法
@@ -49,12 +49,12 @@ public final class MethodProxyUtil {
 			String methodName, String argTypes, Map<String, Object> argMap) {
 		try {
 			Map<String, Object> map = null;
-			synchronized (serviceInfoMap) {
-				if (serviceInfoMap.containsKey(hessianUrl)) {
-					map = serviceInfoMap.get(hessianUrl);
+			synchronized (SERVICE_INFO_MAP) {
+				if (SERVICE_INFO_MAP.containsKey(hessianUrl)) {
+					map = SERVICE_INFO_MAP.get(hessianUrl);
 				} else {
 					map = getRemoteInterfaceInfo(pkgName, interfaceName, methodName, argTypes);
-					serviceInfoMap.put(hessianUrl, map);
+					SERVICE_INFO_MAP.put(hessianUrl, map);
 				}
 			} 
 			Class<?> clazz = (Class<?>) map.get("clazz");
@@ -62,8 +62,6 @@ public final class MethodProxyUtil {
 			Method method = (Method) map.get("method");
 			URLClassLoader classLoader = (URLClassLoader) map.get("classLoader");			
 			HessianProxyFactory factory = new HessianProxyFactory(classLoader);
-//			factory.setAppName(APP_NAME);
-//			factory.setUseConnPool(false);
 			factory.setConnectTimeout(CONN_TIMEOUT);
 			factory.setReadTimeout(READ_TIMEOUT);
 	        Object obj = factory.create(clazz, hessianUrl);
@@ -110,19 +108,21 @@ public final class MethodProxyUtil {
 	@SuppressWarnings("rawtypes")
 	private static Map<String, Object> getRemoteInterfaceInfo(
 			String pkgName, String interfaceName, String methodName, String argTypes) throws Exception {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<>(16);
         Map<String, String> types = parseArgTypes(argTypes);
 		Map<String, Class> paramTypes = null;
 		StringBuilder paramStrB = new StringBuilder();
 		if (types != null && types.size() > 0) {
-			paramTypes = new LinkedHashMap<String, Class>(types.size());
+			paramTypes = new LinkedHashMap<>(types.size());
 			for (String key : types.keySet()) {
 				String className = types.get(key);
 				paramStrB.append(",").append(className).append(" ").append(key);
 				paramTypes.put(key, Class.forName(className));
 			}
 		}
-		if (paramStrB.length() > 0)	paramStrB.deleteCharAt(0);
+		if (paramStrB.length() > 0) {
+			paramStrB.deleteCharAt(0);
+		}
 		paramStrB.insert(0, "(").append(")");		
 		String javaInterface = "package " + pkgName + ";" +
 				"public interface " + interfaceName + " {" +
@@ -154,7 +154,7 @@ public final class MethodProxyUtil {
 	 */
 	private static Map<String, String> parseArgTypes(String argTypes) {		
 		Map<String,String> result = new LinkedHashMap<String,String>();
-		Pattern pattern = Pattern.compile(regex);
+		Pattern pattern = Pattern.compile(REGEX);
 		Matcher matcher = pattern.matcher(argTypes);
 		while(matcher.find()) {
 			String[] groups = matcher.group().split(":");
@@ -176,14 +176,14 @@ public final class MethodProxyUtil {
 			String methodName, String argTypes, Map<String, Object> argMap) {
 		try {			
 			Map<String, Object> map = null;
-			synchronized (serviceInfoMap) {
+			synchronized (SERVICE_INFO_MAP) {
 				String localKey = new StringBuilder().append(pkgName)
 						.append(interfaceName).append(methodName).append(argTypes).toString();
-				if (serviceInfoMap.containsKey(localKey)) {
-					map = serviceInfoMap.get(localKey);
+				if (SERVICE_INFO_MAP.containsKey(localKey)) {
+					map = SERVICE_INFO_MAP.get(localKey);
 				} else {
 					map = getLocalInterfaceInfo(pkgName, interfaceName, methodName, argTypes);
-					serviceInfoMap.put(localKey, map);
+					SERVICE_INFO_MAP.put(localKey, map);
 				}
 			} 			
 			Class<?> clazz = (Class<?>) map.get("clazz");
@@ -208,7 +208,7 @@ public final class MethodProxyUtil {
 	@SuppressWarnings("rawtypes")
 	private static Map<String, Object> getLocalInterfaceInfo(String pkgName,
 			String interfaceName, String methodName, String argTypes) throws Exception {
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<>(16);
 		String interfaceFullName = pkgName + "." + interfaceName;
 		Class<?> clazz = Class.forName(interfaceFullName);
         Map<String, String> types = parseArgTypes(argTypes);
