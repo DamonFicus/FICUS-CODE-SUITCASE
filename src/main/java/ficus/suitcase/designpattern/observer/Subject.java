@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Subject {
 
-    private List<Observer> observerList=new ArrayList<>();
+    private  List<Observer> observerList=new ArrayList<>();
 
     private  int state;
 
@@ -26,6 +26,10 @@ public class Subject {
         for(Observer observer:observerList){
             observer.update();
         }
+    }
+
+    public List<Observer> getObserverList(){
+        return observerList;
     }
 
 
