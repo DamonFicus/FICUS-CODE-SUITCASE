@@ -1,5 +1,7 @@
 package ficus.suitcase.designpattern.observer;
 
+import java.util.ArrayList;
+
 /**
  * @author DamonFicus on 20190505
  * 观察者模式：
@@ -31,6 +33,5 @@ public class ObserverPatternDemo {
         subject.remove(bs);
         subject.remove(os);
         subject.setState(18);
-
     }
 }

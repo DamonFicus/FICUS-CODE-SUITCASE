@@ -37,6 +37,14 @@ public class Subject {
         }
     }
 
+    public void remove2(Observer observer){
+       int i=observerList.indexOf(observer);
+       //如果不存在，则会返回-1
+       if(i>0){
+           observerList.remove(i);
+       }
+    }
+
 
     public void notifyAllObservers(){
         for(Observer observer:observerList){
