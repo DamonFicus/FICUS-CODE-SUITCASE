@@ -1,7 +1,5 @@
 package ficus.suitcase.designpattern.observer;
 
-import java.util.ArrayList;
-
 /**
  * @author DamonFicus on 20190505
  * 观察者模式：
