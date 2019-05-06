@@ -1,14 +1,6 @@
 package ficus.suitcase.jettynotifylistner;
 
-import org.eclipse.jetty.server.Connector;
-import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
-import org.eclipse.jetty.server.handler.DefaultHandler;
-import org.eclipse.jetty.server.handler.HandlerCollection;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * JettyServer监听回调服务
@@ -22,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * @author DamonFicus
  */
 public class JettyListenerServer {
-    private static final Logger logger = LoggerFactory.getLogger(JettyListenerServer.class);
+//    private static final Logger logger = LoggerFactory.getLogger(JettyListenerServer.class);
 
     private Server server;
     /**
@@ -36,7 +28,7 @@ public class JettyListenerServer {
      */
     public void startServer() throws Exception {
 
-        logger.info("JettyListenerServer 服务启动中,监听服务端口{}",ASYN_NOTIFY_PORT);
+//        logger.info("JettyListenerServer 服务启动中,监听服务端口{}",ASYN_NOTIFY_PORT);
         server = new Server();
 //        ServerConnector connector = new ServerConnector(server);
 //        connector.setPort(Integer.valueOf(ASYN_NOTIFY_PORT));
@@ -48,7 +40,7 @@ public class JettyListenerServer {
 //        handlers.setHandlers(new Handler[] { context, new DefaultHandler()});
 //        server.setHandler(handlers);
 //        server.start();
-        logger.info("JettyListenerServer 监听服务通知服务启动成功");
+//        logger.info("JettyListenerServer 监听服务通知服务启动成功");
     }
 
     /**
@@ -57,7 +49,7 @@ public class JettyListenerServer {
      */
     public void stopServer() throws Exception {
 //        if(server!=null){
-            logger.info("JettyListenerServer监听通知服务关闭");
+//            logger.info("JettyListenerServer监听通知服务关闭");
 //            server.stop();
 //        }
     }
