@@ -38,16 +38,16 @@ public class JettyListenerServer {
 
         logger.info("JettyListenerServer 服务启动中,监听服务端口{}",ASYN_NOTIFY_PORT);
         server = new Server();
-        ServerConnector connector = new ServerConnector(server);
-        connector.setPort(Integer.valueOf(ASYN_NOTIFY_PORT));
-        server.setConnectors(new Connector[] {connector});
-        ServletContextHandler context = new ServletContextHandler();
-        context.setContextPath("/");
-        context.addServlet(AsynNotifyServlet.class, "/");
-        HandlerCollection handlers = new HandlerCollection();
-        handlers.setHandlers(new Handler[] { context, new DefaultHandler()});
-        server.setHandler(handlers);
-        server.start();
+//        ServerConnector connector = new ServerConnector(server);
+//        connector.setPort(Integer.valueOf(ASYN_NOTIFY_PORT));
+//        server.setConnectors(new Connector[] {connector});
+//        ServletContextHandler context = new ServletContextHandler();
+//        context.setContextPath("/");
+//        context.addServlet(AsynNotifyServlet.class, "/");
+//        HandlerCollection handlers = new HandlerCollection();
+//        handlers.setHandlers(new Handler[] { context, new DefaultHandler()});
+//        server.setHandler(handlers);
+//        server.start();
         logger.info("JettyListenerServer 监听服务通知服务启动成功");
     }
 
@@ -56,10 +56,10 @@ public class JettyListenerServer {
      * @throws Exception
      */
     public void stopServer() throws Exception {
-        if(server!=null){
+//        if(server!=null){
             logger.info("JettyListenerServer监听通知服务关闭");
-            server.stop();
-        }
+//            server.stop();
+//        }
     }
 
 }
