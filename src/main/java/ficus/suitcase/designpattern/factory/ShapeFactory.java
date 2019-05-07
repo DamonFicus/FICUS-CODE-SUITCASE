@@ -2,6 +2,9 @@ package ficus.suitcase.designpattern.factory;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ *简单工厂模式
+ */
 public class ShapeFactory {
 
    public  Shape getShape(String shapeType){
