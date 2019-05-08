@@ -1,4 +1,4 @@
-package ficus.suitcase.adaptor;
+package ficus.suitcase.designpattern.adaptor;
 
 import java.util.Enumeration;
 import java.util.Iterator;
