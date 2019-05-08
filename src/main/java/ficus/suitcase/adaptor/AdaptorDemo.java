@@ -10,6 +10,11 @@ import java.util.Hashtable;
  */
 public class AdaptorDemo {
 
+    /**
+     * 将Enumeration 适配 iterator  对于remove，进行异常处理
+     * @param args
+     */
+
     public static void main(String[] args) {
         Hashtable hs = new Hashtable();
         hs.put("a",1);
