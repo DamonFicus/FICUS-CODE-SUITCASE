@@ -30,9 +30,12 @@ public class Person {
     public String test(int swithPara){
         String result="";
         switch (swithPara){
-         case  1: result="one";break;
-         case  2: result="two";break;
-         case  3: result="three";break;
+         case  1: result="one";
+         break;
+         case  2: result="two";
+         break;
+         case  3: result="three";
+         break;
          default: result="Parent";
         }
         return result;
